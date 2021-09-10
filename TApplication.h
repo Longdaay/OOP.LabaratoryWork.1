@@ -17,6 +17,7 @@ public:
 
 	void PrintResultPolinom();
 	void PrintPolinomIsNotFill();
+	void PrintPolinomText();
 private:
 	int currentMenuItem = 0;
 	std::vector<std::string> MenuOptions{ "Ввести коэффициенты полинома", "Вычислить корни", "Вычислить значения полинома с вводом значения аргумета", "Вывести полином", "Выход" };

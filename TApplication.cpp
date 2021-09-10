@@ -52,7 +52,7 @@ void TApplication::ConfirmMenuItem() // выбор после подтверждения в зависимости 
 	case 3:
 		if (CanCalculatePolinom())
 		{
-			std::cout << this->currentPolinom.getPolinom() << std::endl;
+			PrintPolinomText();
 			system("pause");
 		}
 		else
@@ -163,6 +163,15 @@ void TApplication::PrintPolinomIsNotFill()
 {
 	SetColor(4, 7);
 	std::cout << "Не заполнены коэффициенты полинома. Заполните коэффициенты и попробуйте снова." << std::endl;
+	SetColor(0, 7);
+}
+
+void TApplication::PrintPolinomText()
+{
+	system("cls");
+	std::cout << "-----Вывод полинома-----" << std::endl;
+	SetColor(2, 7);
+	std::cout << this->currentPolinom.getPolinom() << std::endl;
 	SetColor(0, 7);
 }
 
