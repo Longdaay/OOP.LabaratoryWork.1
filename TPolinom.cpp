@@ -27,23 +27,30 @@ std::string TPolinom::getPolinom()
 	std::string polinom;
 	if (this->a != 0) 
 	{
-		polinom.append(std::to_string(this->a));
+		std::string a = std::to_string(this->a);
+		while (a.back() == '0' || a.back() == ',') a.pop_back();
+		polinom.append(a);
+
 		polinom.append("x^2 ");
 	}
 	if (this->b != 0)
 	{
 		if (this->b > 0 && this->a != 0)
 			polinom.append("+ ");
-		polinom.append(std::to_string(this->b));
+		std::string b = std::to_string(this->b);
+		while (b.back() == '0' || b.back() == ',') b.pop_back();
+		polinom.append(b);
+
 		polinom.append("x ");
 	}
 	if (this->c != 0)
 	{
 		if (this->c > 0 && (this->a != 0 || this->b != 0))
 			polinom.append("+ ");
-		polinom.append(std::to_string(this->c));
+		std::string ñ = std::to_string(this->c);
+		while (ñ.back() == '0' || ñ.back() == ',') ñ.pop_back();
+		polinom.append(ñ);
 	}
-	polinom.append(" = 0");
 	return polinom;
 }
 
