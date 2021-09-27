@@ -70,8 +70,8 @@ bool TPolinom::Calculate()
 	number discriminant = b * b - 4 * a * c;
 	if (discriminant > 0)
 	{
-		CalculatedValues[0] = ((-b) + sqrt(discriminant)) / (2 * a);
-		CalculatedValues[1] = ((-b) - sqrt(discriminant)) / (2 * a);
+		CalculatedValues[0] = ((b * (-1)) + sqrt(discriminant)) / (a * 2);
+		CalculatedValues[1] = ((b * (-1))  - sqrt(discriminant)) / (a * 2);
 		success = true;
 	}
 	if (discriminant == 0) // Условие для дискриминанта равного нулю

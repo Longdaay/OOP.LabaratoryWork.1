@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TApplication.cpp" />
+    <ClCompile Include="TComplex.cpp" />
     <ClCompile Include="TPolinom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Number.h" />
     <ClInclude Include="TApplication.h" />
+    <ClInclude Include="TComplex.h" />
     <ClInclude Include="TPolinom.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
