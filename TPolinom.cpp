@@ -7,7 +7,7 @@ TPolinom::TPolinom()
 	c = 1;
 	bisPolinomFilled = false;
 	for (int i = 0; i < 2 ; i++)
-		CalculatedValues.push_back(0);
+		CalculatedValues.push_back(number(0.0));
 }
 
 void TPolinom::setPolinom(number a, number b, number c)
@@ -22,36 +22,9 @@ void TPolinom::setIsPolinomFilled(bool flag)
 	this->bisPolinomFilled = flag;
 }
 
-std::string TPolinom::getPolinom()
+std::vector<number> TPolinom::getPolinom()
 {
-	std::string polinom;
-	if (this->a != 0) 
-	{
-		std::string a = std::to_string(this->a);
-		while (a.back() == '0' || a.back() == ',') a.pop_back();
-		polinom.append(a);
-
-		polinom.append("x^2 ");
-	}
-	if (this->b != 0)
-	{
-		if (this->b > 0 && this->a != 0)
-			polinom.append("+ ");
-		std::string b = std::to_string(this->b);
-		while (b.back() == '0' || b.back() == ',') b.pop_back();
-		polinom.append(b);
-
-		polinom.append("x ");
-	}
-	if (this->c != 0)
-	{
-		if (this->c > 0 && (this->a != 0 || this->b != 0))
-			polinom.append("+ ");
-		std::string с = std::to_string(this->c);
-		while (с.back() == '0' || с.back() == ',') с.pop_back();
-		polinom.append(с);
-	}
-	return polinom;
+	return { this->a, this->b, this->c };
 }
 
 std::vector<number> TPolinom::getCalculatedPolinom()
@@ -67,20 +40,20 @@ bool TPolinom::getIsPolinomFilled()
 bool TPolinom::Calculate()
 {
 	bool success;
-	number discriminant = b * b - 4 * a * c;
-	if (discriminant > 0)
+	number discriminant = b * b - a * 4.0 * c;
+	if (discriminant > number(0))
 	{
-		CalculatedValues[0] = ((b * (-1)) + sqrt(discriminant)) / (a * 2);
-		CalculatedValues[1] = ((b * (-1))  - sqrt(discriminant)) / (a * 2);
+		CalculatedValues[0] = ((b * (-1.0)) + sqrt(discriminant)) / (a * 2.0);
+		CalculatedValues[1] = ((b * (-1.0))  - sqrt(discriminant)) / (a * 2.0);
 		success = true;
 	}
-	if (discriminant == 0) // Условие для дискриминанта равного нулю
+	else if (discriminant == number(0)) // Условие для дискриминанта равного нулю
 	{
-		CalculatedValues[0] = -(b / (2 * a));
+		CalculatedValues[0] = (b / (a * 2.0)) * (-1.0);
 		CalculatedValues[1] = CalculatedValues[0];
 		success = true;
 	}
-	if (discriminant < 0) // Условие при дискриминанте меньше нуля
+	else if (discriminant < 0) // Условие при дискриминанте меньше нуля
 		success = false;
 
 	return success;

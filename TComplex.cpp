@@ -7,84 +7,101 @@ TComplex::TComplex(double real, double imaginary)
 	this->imaginary = imaginary;
 }
 
+TComplex::TComplex(double real)
+{
+	this->real = real;
+	this->imaginary = 0;
+}
+
 TComplex::TComplex()
 {
-	real = 0;
-	imaginary = 0;
+	this->real = 0;
+	this->imaginary = 0;
 }
 
-TComplex TComplex::operator+(double real)
+void TComplex::operator=(int value)
 {
-	return { real + this->real, this->imaginary };
+	this->real = double(value);
+	this->imaginary = 0;
+
 }
 
-TComplex TComplex::operator+(TComplex complex)
+bool TComplex::operator!=(TComplex value)
 {
-	return { this->real + complex.real, this->imaginary };
+	return (this->real != value.real);
 }
 
-TComplex TComplex::operator-(TComplex complex)
+bool TComplex::operator>(TComplex value)
 {
-	return { this->real - complex.real, this->imaginary - complex.imaginary };
+	return (this->real > value.real);
 }
 
-TComplex TComplex::operator-(double value)
+bool TComplex::operator<(TComplex value)
 {
-	return { this->real - value, this->imaginary };
+	return (this->real < value.real);
 }
 
-int TComplex::operator*()
+bool TComplex::operator==(TComplex value)
 {
-	return int();
+	return (this->real == value.real);
 }
 
-TComplex TComplex::operator*(TComplex complex)
+TComplex TComplex::operator*(TComplex value)
 {
-	return { (this->real * complex.real - this->imaginary * complex.imaginary), (this->real * complex.imaginary - complex.real * this->imaginary) };
+	return { (this->real * value.real - this->imaginary * value.imaginary), (this->real * value.imaginary - value.real * this->imaginary) };
 }
 
-TComplex TComplex::operator*(int value)
+TComplex TComplex::operator*(double value)
 {
-	return { this->real * value, this->imaginary * value };
+	return { (this->real * value), (this->imaginary * value) };
 }
 
-TComplex TComplex::operator/(TComplex)
+TComplex TComplex::operator-(TComplex value)
 {
-	return {};
+	return { (this->real - value.real), (this->imaginary - value.imaginary) };
 }
 
-TComplex TComplex::operator=(int value)
+TComplex TComplex::operator/(TComplex value)
 {
-	return { value, 0.0 };
+	double resultReal, resultImaginary;
+	resultReal = (this->real * value.real + this->imaginary * value.imaginary) / (value.real * value.real + value.imaginary * value.imaginary);
+	resultImaginary = (this->imaginary * value.real - this->real * value.imaginary) / (value.real * value.real + value.imaginary * value.imaginary);
+	return {resultReal, resultImaginary};
 }
 
-bool TComplex::operator==(int value)
+TComplex TComplex::operator+(TComplex value)
 {
-	return (this->real == value ? true : false);;
+	return { (this->real + value.real), (this->imaginary + value.imaginary) };
 }
 
-bool TComplex::operator!=(int value)
+std::ostream& operator<<(std::ostream& os, const TComplex& value)
 {
-	return (this->real != value ? true : false);
+	os << value.real << (value.imaginary < 0 ? "" : "+") << value.imaginary << "i";
+	return os;
 }
 
-bool TComplex::operator>(int value)
+std::istream& operator>>(std::istream& in, TComplex& value)
 {
-	return (this->real > value ? true : false);
+	in >> value.real;
+	in >> value.imaginary;
+	return in;
 }
 
-bool TComplex::operator<(int value)
+TComplex sqrt(const TComplex& complex)
 {
-	return (this->real < value ? true : false);
-}
+	if (complex.imaginary == 0.0)
+	{
+		if (complex.real >= 0.0)
+		{
+			return { std::sqrt(complex.real), 0.0 };
+		}
+		else
+		{
+			return { 0.0, std::sqrt(-complex.real) };
+		}
+	}
+	const double modulus = std::sqrt(complex.real * complex.real + complex.imaginary * complex.imaginary);
 
-void TComplex::operator>>(TComplex complex)
-{
-	this->real = complex.real;
-	this->imaginary = complex.imaginary;
-}
+	return { std::sqrt((modulus + complex.real) / 2), (std::signbit(complex.imaginary) ? -1 : 1) * std::sqrt((modulus - complex.real) / 2) };
 
-void TComplex::operator<<(TComplex complex)
-{
-	std::cout << complex.real << (complex.imaginary >= 0.0 ? '+' : '\0') << complex.imaginary << "*i" << std::endl;
 }

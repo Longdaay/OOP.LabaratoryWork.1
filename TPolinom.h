@@ -11,7 +11,7 @@ public:
 	void setPolinom(number a, number b, number c);
 	void setIsPolinomFilled(bool flag);
 
-	std::string getPolinom();
+	std::vector<number> getPolinom();
 	std::vector<number> getCalculatedPolinom();
 
 	bool getIsPolinomFilled();

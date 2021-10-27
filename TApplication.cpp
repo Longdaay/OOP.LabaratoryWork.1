@@ -52,7 +52,12 @@ void TApplication::ConfirmMenuItem() // выбор после подтверждения в зависимости 
 	case 3:
 		if (CanCalculatePolinom())
 		{
+			system("cls");
+			std::cout << "-----Вывод полинома-----" << std::endl;
+			SetColor(2, 7);
 			PrintPolinomText();
+			std::cout << std::endl;
+			SetColor(0, 7);
 			system("pause");
 		}
 		else
@@ -140,7 +145,9 @@ void TApplication::CalculatePolinomWithArgument()
 	system("cls");
 	number tempArgument;
 	std::cout << "-----Вычисление полинома с введенным аргументом-----" << std::endl;
-	std::cout << "Полином: " << currentPolinom.getPolinom() << std::endl;
+	std::cout << "Полином: ";
+	PrintPolinomText();
+	std::cout << std::endl;
 	tempArgument = InputParameter("аргумента");
 	std::cout << "Результат равен: " << currentPolinom.CalculatePolinomWithArgument(tempArgument) << std::endl;
 
@@ -151,7 +158,9 @@ void TApplication::CalculatePolinomWithArgument()
 void TApplication::PrintResultPolinom()
 {
 	system("cls");
-	std::cout << "Полученный результат полинома " << currentPolinom.getPolinom() << std::endl;
+	std::cout << "Полученный результат полинома ";
+	PrintPolinomText();
+	std::cout << std::endl;
 	std::vector<number> tempResults = currentPolinom.getCalculatedPolinom();
 	std::cout << "x_1 = " << tempResults[0] << "   " << "x_2 = " << tempResults[1] << std::endl;
 
@@ -168,11 +177,24 @@ void TApplication::PrintPolinomIsNotFill()
 
 void TApplication::PrintPolinomText()
 {
-	system("cls");
-	std::cout << "-----Вывод полинома-----" << std::endl;
-	SetColor(2, 7);
-	std::cout << this->currentPolinom.getPolinom() << std::endl;
-	SetColor(0, 7);
+	std::vector<number> resultPolinom = currentPolinom.getPolinom();
+	if (resultPolinom[0] != number(0))
+	{
+		std::cout << resultPolinom[0] << "*x^2 ";
+	}
+	if (resultPolinom[1] != number(0))
+	{
+		if (resultPolinom[1] > 0 && resultPolinom[0] != 0)
+			std::cout << "+ ";
+		std::cout << resultPolinom[1] << "x";
+	}
+	if (resultPolinom[2] != number(0))
+	{
+		if (resultPolinom[2] > 0 && (resultPolinom[0] != 0 || resultPolinom[1] != 0))
+			std::cout << "+ ";
+		std::cout << resultPolinom[2];
+	}
+
 }
 
 void TApplication::ChoiceMenuItem() // в зависимости от стрелок изменяем меню
