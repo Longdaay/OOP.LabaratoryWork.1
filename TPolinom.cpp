@@ -41,22 +41,12 @@ bool TPolinom::Calculate()
 {
 	bool success;
 	number discriminant = b * b - a * 4.0 * c;
-	if (discriminant > number(0))
-	{
-		CalculatedValues[0] = ((b * (-1.0)) + sqrt(discriminant)) / (a * 2.0);
-		CalculatedValues[1] = ((b * (-1.0))  - sqrt(discriminant)) / (a * 2.0);
-		success = true;
-	}
-	else if (discriminant == number(0)) // Условие для дискриминанта равного нулю
-	{
-		CalculatedValues[0] = (b / (a * 2.0)) * (-1.0);
-		CalculatedValues[1] = CalculatedValues[0];
-		success = true;
-	}
-	else if (discriminant < 0) // Условие при дискриминанте меньше нуля
-		success = false;
 
-	return success;
+	CalculatedValues[0] = ((b * (-1.0)) + sqrt(discriminant)) / (a * 2.0);
+	CalculatedValues[1] = ((b * (-1.0)) - sqrt(discriminant)) / (a * 2.0);
+	success = true;
+
+	return true;
 }
 
 number TPolinom::CalculatePolinomWithArgument(number argument)
