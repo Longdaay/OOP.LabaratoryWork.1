@@ -48,7 +48,7 @@ bool TComplex::operator==(TComplex value)
 
 TComplex TComplex::operator*(TComplex value)
 {
-	return { (this->real * value.real - this->imaginary * value.imaginary), (this->real * value.imaginary - value.real * this->imaginary) };
+	return { (this->real * value.real - this->imaginary * value.imaginary), (this->real * value.imaginary + value.real * this->imaginary) };
 }
 
 TComplex TComplex::operator*(double value)
@@ -64,8 +64,17 @@ TComplex TComplex::operator-(TComplex value)
 TComplex TComplex::operator/(TComplex value)
 {
 	double resultReal, resultImaginary;
-	resultReal = (this->real * value.real + this->imaginary * value.imaginary) / (value.real * value.real + value.imaginary * value.imaginary);
-	resultImaginary = (this->imaginary * value.real - this->real * value.imaginary) / (value.real * value.real + value.imaginary * value.imaginary);
+	double divisor = (value.real * value.real + value.imaginary * value.imaginary);
+	if (divisor != 0.0)
+	{
+		resultReal = (this->real * value.real + this->imaginary * value.imaginary) / divisor;
+		resultImaginary = (this->imaginary * value.real - this->real * value.imaginary) / divisor;
+	}
+	else
+	{
+		std::cerr << "Деление на ноль!";
+		exit(1);
+	}
 	return {resultReal, resultImaginary};
 }
 

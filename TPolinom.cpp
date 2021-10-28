@@ -40,11 +40,11 @@ bool TPolinom::getIsPolinomFilled()
 bool TPolinom::Calculate()
 {
 	bool success;
+
 	number discriminant = b * b - a * 4.0 * c;
 
 	CalculatedValues[0] = ((b * (-1.0)) + sqrt(discriminant)) / (a * 2.0);
 	CalculatedValues[1] = ((b * (-1.0)) - sqrt(discriminant)) / (a * 2.0);
-	success = true;
 
 	return true;
 }
