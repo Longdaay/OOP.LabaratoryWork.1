@@ -101,7 +101,7 @@ std::ostream& operator<<(std::ostream& os, const TComplex& value)
 	else
 	{
 		if (value.real != 0.0)
-			os << value.real;
+			os << "(" <<value.real << ")";
 	}
 	return os;
 }
