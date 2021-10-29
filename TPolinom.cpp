@@ -39,8 +39,6 @@ bool TPolinom::getIsPolinomFilled()
 
 bool TPolinom::Calculate()
 {
-	bool success;
-
 	number discriminant = b * b - a * 4.0 * c;
 
 	CalculatedValues[0] = ((b * (-1.0)) + sqrt(discriminant)) / (a * 2.0);
@@ -51,11 +49,7 @@ bool TPolinom::Calculate()
 
 number TPolinom::CalculatePolinomWithArgument(number argument)
 {
-	number calculatedValue;
-
-	calculatedValue = (this->a * (argument * argument)) + (this->b * argument) + this->c;
-
-	return calculatedValue;
+	return (this->a * (argument * argument)) + (this->b * argument) + this->c;
 }
 
 

@@ -10,40 +10,40 @@ TComplex::TComplex(double real, double imaginary)
 TComplex::TComplex(double real)
 {
 	this->real = real;
-	this->imaginary = 0;
+	this->imaginary = 0.0;
 }
 
 TComplex::TComplex()
 {
-	this->real = 0;
-	this->imaginary = 0;
+	this->real = 0.0;
+	this->imaginary = 0.0;
 }
 
 void TComplex::operator=(int value)
 {
 	this->real = double(value);
-	this->imaginary = 0;
+	this->imaginary = 0.0;
 
 }
 
 bool TComplex::operator!=(TComplex value)
 {
-	return (this->real != value.real);
+	return (this->real != value.real || this->imaginary != value.imaginary);
 }
 
 bool TComplex::operator>(TComplex value)
 {
-	return (this->real > value.real);
+	return (this->real > value.real || this->imaginary > value.imaginary);
 }
 
 bool TComplex::operator<(TComplex value)
 {
-	return (this->real < value.real);
+	return (this->real < value.real || this->imaginary < value.imaginary);
 }
 
 bool TComplex::operator==(TComplex value)
 {
-	return (this->real == value.real);
+	return (this->real == value.real || this->imaginary == value.imaginary);
 }
 
 TComplex TComplex::operator*(TComplex value)
@@ -85,7 +85,26 @@ TComplex TComplex::operator+(TComplex value)
 
 std::ostream& operator<<(std::ostream& os, const TComplex& value)
 {
-	os << value.real << (value.imaginary < 0 ? "" : "+") << value.imaginary << "i";
+	//os << value.real << (value.imaginary < 0 ? "" : "+") << value.imaginary << "i";
+	if (value.imaginary != 0)
+	{
+		os << "(";
+		if (value.real != 0.0)
+		{
+			os << value.real << (value.imaginary < 0 ? "" : "+") << value.imaginary << "i)";
+		}
+		else
+		{
+			os << value.imaginary << "i)";
+		}
+	}
+	else
+	{
+		if (value.real != 0.0)
+		{
+			os << value.real;
+		}
+	}
 	return os;
 }
 
