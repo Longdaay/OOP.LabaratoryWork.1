@@ -115,7 +115,7 @@ number TApplication::InputParameter(std::string ParameterText)
 {
 	bool bIsCorrectValue = false;
 	number tempValue;
-	std::cout << "¬ведите параметр " << ParameterText << " : ";
+	std::cout << "¬ведите параметр " << ParameterText << " (действительна€ и мнима€ часть через пробел) : ";
 	while (!bIsCorrectValue)
 	{
 		std::cin >> tempValue;
