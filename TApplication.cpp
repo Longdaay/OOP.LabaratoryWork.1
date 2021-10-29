@@ -184,13 +184,13 @@ void TApplication::PrintPolinomText()
 	}
 	if (resultPolinom[1] != number(0))
 	{
-		if (resultPolinom[1] > 0 && resultPolinom[0] != 0)
+		if (resultPolinom[0] != 0)
 			std::cout << " + ";
 		std::cout << resultPolinom[1] << "*x";
 	}
 	if (resultPolinom[2] != number(0))
 	{
-		if (resultPolinom[2] > 0 && (resultPolinom[0] != 0 || resultPolinom[1] != 0))
+		if (resultPolinom[0] != 0 || resultPolinom[1] != 0)
 			std::cout << " + ";
 		std::cout << resultPolinom[2];
 	}

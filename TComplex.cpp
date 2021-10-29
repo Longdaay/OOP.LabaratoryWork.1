@@ -85,25 +85,23 @@ TComplex TComplex::operator+(TComplex value)
 
 std::ostream& operator<<(std::ostream& os, const TComplex& value)
 {
-	//os << value.real << (value.imaginary < 0 ? "" : "+") << value.imaginary << "i";
 	if (value.imaginary != 0)
 	{
 		os << "(";
 		if (value.real != 0.0)
-		{
-			os << value.real << (value.imaginary < 0 ? "" : "+") << value.imaginary << "i)";
-		}
+			os << value.real << (value.imaginary < 0 ? "" : "+");
+
+		if (value.imaginary == -1)
+			os << "-i)";
+		else if (value.imaginary == 1)
+			os << "i)";
 		else
-		{
 			os << value.imaginary << "i)";
-		}
 	}
 	else
 	{
 		if (value.real != 0.0)
-		{
 			os << value.real;
-		}
 	}
 	return os;
 }
